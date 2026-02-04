@@ -54,7 +54,7 @@ Default admin is seeded from backend env:
 4) Set env vars (see `backend/.env.example`)
 5) Start command:
 ```bash
-sh -lc 'alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}'
+appad -lc 'alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}'
 ```
 
 ### Vercel (Frontend)
