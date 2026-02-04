@@ -1,0 +1,9 @@
+[phases.setup]
+# keep Python deps isolated and reproducible
+nixPkgs = ["python312", "gcc", "postgresql"]
+
+[phases.install]
+cmds = ["python -m pip install --upgrade pip", "pip install -r requirements.txt"]
+
+[start]
+cmd = "sh -lc 'python -m uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}'"

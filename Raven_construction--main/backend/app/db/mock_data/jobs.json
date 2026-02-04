@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Rockwell Roof A",
+    "builder": "Rockwell Homes",
+    "roofType": "Asphalt",
+    "pitch": 6,
+    "areaSqFt": 2000
+  },
+  {
+    "name": "Liberty Roof B",
+    "builder": "Liberty Homes",
+    "roofType": "Metal",
+    "pitch": 8,
+    "areaSqFt": 3500
+  }
+]

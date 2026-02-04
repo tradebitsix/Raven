@@ -1,0 +1,174 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  RAVEN UI — Token Theme Engine
+  - Light default, .dark override
+  - Graphic depth is invariant across themes
+  - Dual accent: warm gold (action) + cool sapphire/steel (structure)
+*/
+
+/* LIGHT (default) */
+:root {
+  color-scheme: light;
+
+  /* surfaces */
+  --bg: 245 247 252;
+  --panel: 255 255 255;
+  --card: 255 255 255;
+
+  /* text */
+  --text: 18 22 34;
+  --text-dim: 92 102 126;
+
+  /* accents (B) */
+  --accent-warm: 201 162 98;
+  --accent-warm-2: 255 210 120;
+  --accent-cool: 84 143 255;
+  --accent-cool-2: 0 210 255;
+
+  /* borders/glass */
+  --border: 0 0 0;
+  --border-a: 0.08;
+  --glass-a: 0.62;
+
+  /* shadows */
+  --shadow-1: 0 0 0 1px rgba(0,0,0,0.06), 0 18px 60px rgba(0,0,0,0.10);
+  --shadow-2: 0 0 0 1px rgba(0,0,0,0.08), 0 26px 90px rgba(0,0,0,0.16);
+  --shadow-inset: inset 0 1px 0 rgba(255,255,255,0.75), inset 0 -1px 0 rgba(0,0,0,0.06);
+}
+
+/* DARK */
+.dark {
+  color-scheme: dark;
+
+  --bg: 8 10 18;
+  --panel: 14 18 32;
+  --card: 18 24 44;
+
+  --text: 236 240 255;
+  --text-dim: 170 180 210;
+
+  --accent-warm: 201 162 98;
+  --accent-warm-2: 255 210 120;
+  --accent-cool: 84 143 255;
+  --accent-cool-2: 0 210 255;
+
+  --border: 255 255 255;
+  --border-a: 0.08;
+  --glass-a: 0.08;
+
+  --shadow-1: 0 0 0 1px rgba(255,255,255,0.06), 0 22px 70px rgba(0,0,0,0.55);
+  --shadow-2: 0 0 0 1px rgba(255,255,255,0.08), 0 34px 100px rgba(0,0,0,0.65);
+  --shadow-inset: inset 0 1px 0 rgba(255,255,255,0.10), inset 0 -1px 0 rgba(0,0,0,0.45);
+}
+
+html, body { height: 100%; }
+
+body {
+  background: rgb(var(--bg));
+  color: rgb(var(--text));
+}
+
+a { color: inherit; }
+
+@layer utilities {
+  /* Background depth: cool structural light + warm action glow + subtle noise */
+  .bg-app {
+    background:
+      radial-gradient(1100px 650px at 12% 0%, rgba(var(--accent-cool), 0.20), transparent 60%),
+      radial-gradient(900px 560px at 92% 18%, rgba(var(--accent-cool-2), 0.12), transparent 58%),
+      radial-gradient(1000px 700px at 35% 22%, rgba(var(--accent-warm), 0.18), transparent 62%),
+      radial-gradient(900px 700px at 70% 90%, rgba(var(--accent-warm-2), 0.10), transparent 60%),
+      linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.00)),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 3px),
+      rgb(var(--bg));
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, var(--glass-a));
+    border: 1px solid rgba(var(--border), var(--border-a));
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  /* Card depth (rim + inset highlight + elevation) */
+  .card {
+    border-radius: 1.25rem;
+    box-shadow: var(--shadow-1);
+  }
+
+  .card-strong {
+    border-radius: 1.25rem;
+    box-shadow: var(--shadow-2);
+  }
+
+  .card-rim {
+    box-shadow:
+      0 0 0 1px rgba(var(--border), calc(var(--border-a) + 0.02)),
+      0 0 0 2px rgba(var(--accent-cool), 0.07),
+      var(--shadow-1);
+  }
+
+  .card-inset {
+    box-shadow: var(--shadow-inset);
+  }
+
+  .text-dim { color: rgba(var(--text-dim), 1); }
+
+  .btn-primary {
+    background: linear-gradient(135deg, rgba(var(--accent-warm), 1), rgba(var(--accent-warm-2), 1));
+    color: rgb(15 12 8);
+    border-radius: 0.9rem;
+    padding: 0.6rem 0.9rem;
+    font-weight: 900;
+    box-shadow:
+      0 18px 55px rgba(var(--accent-warm), 0.22),
+      0 0 0 1px rgba(255,255,255,0.08);
+  }
+
+  .btn-ghost {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(var(--border), 0.12);
+    border-radius: 0.9rem;
+    padding: 0.6rem 0.9rem;
+    font-weight: 800;
+  }
+
+  /* Status pills */
+  .pill {
+    font-size: 11px;
+    padding: 0.28rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid rgba(var(--border), 0.10);
+    background: rgba(255,255,255,0.06);
+  }
+
+  .pill-warm {
+    background: rgba(var(--accent-warm), 0.16);
+    border-color: rgba(var(--accent-warm), 0.35);
+    box-shadow: 0 10px 30px rgba(var(--accent-warm), 0.14);
+  }
+
+  .pill-success {
+    background: rgba(70, 220, 170, 0.12);
+    border-color: rgba(70, 220, 170, 0.30);
+    box-shadow: 0 10px 30px rgba(70, 220, 170, 0.10);
+  }
+
+  .pill-hold {
+    background: rgba(255, 180, 70, 0.14);
+    border-color: rgba(255, 180, 70, 0.32);
+    box-shadow: 0 10px 30px rgba(255, 180, 70, 0.12);
+  }
+
+  /* Interaction */
+  .lift {
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+  .lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-2);
+  }
+}
